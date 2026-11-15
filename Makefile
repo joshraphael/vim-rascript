@@ -1,16 +1,16 @@
 VERSION ?= v0.5.1
 URL     := https://github.com/joshraphael/rascript-syntax/releases/download/$(VERSION)/rascript.vim
 VIMDIR  ?= $(HOME)/.vim
-FILES   := ftdetect/rascript.vim ftplugin/rascript.vim syntax/rascript.vim
+PLUGIN  := $(VIMDIR)/pack/plugins/start/vim-rascript
 
 .PHONY: clean install syntax test
 
 clean:
-	rm -rf syntax
-	rm -f $(addprefix $(VIMDIR)/,$(FILES))
+	rm -rf $(PLUGIN)
 
-install:
-	for f in $(FILES); do install -Dm644 $$f $(VIMDIR)/$$f; done
+install: clean
+	mkdir -p $(PLUGIN)
+	cp -r . $(PLUGIN)
 
 syntax:
 	mkdir -p syntax
